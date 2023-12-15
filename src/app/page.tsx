@@ -1,5 +1,11 @@
+import ConnectDialog from "@/components/ConnectDialog"
+
 const Home = () => {
-  return <main>Hello World!</main>
+  return (
+    <main>
+      <ConnectDialog />
+    </main>
+  )
 }
 
 export default Home
