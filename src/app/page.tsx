@@ -3,13 +3,16 @@ import BackgroundContainer from "@/components/BackgroundContainer"
 import Connected from "@/components/Connected"
 import DisconnectButton from "@/components/DisconnectButton"
 import LandingConnectionCard from "@/components/LandingConnectionCard"
+import NetworkGuard from "@/components/NetworkGuard"
 
 const Home = () => {
   return (
     <BackgroundContainer>
-      <Connected>
-        <AssetsTable />
-      </Connected>
+      <NetworkGuard>
+        <Connected>
+          <AssetsTable />
+        </Connected>
+      </NetworkGuard>
       <LandingConnectionCard />
       <DisconnectButton />
     </BackgroundContainer>
