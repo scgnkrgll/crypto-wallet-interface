@@ -1,18 +1,29 @@
 "use client"
 import { Button, Dialog, Flex } from "@radix-ui/themes"
 import { useState } from "react"
+import { BaseError } from "viem"
 import { useAccount, useConnect } from "wagmi"
 
 import DisconnectButton from "./DisconnectButton"
+import { useToast } from "./Toast"
 
 const ConnectDialog = () => {
   const [open, setOpen] = useState(false)
 
   const { connector, isConnected } = useAccount()
 
+  const toast = useToast()
+
   const { connect, connectors, isLoading, pendingConnector } = useConnect({
     onSettled() {
       setOpen(false)
+    },
+    onError(error) {
+      toast({
+        title: "Connection Failed",
+        description: (error as BaseError).shortMessage ?? error.message,
+        variant: "error",
+      })
     },
   })
 

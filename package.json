@@ -10,6 +10,7 @@
     "wagmi": "wagmi generate"
   },
   "dependencies": {
+    "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/themes": "^2.0.2",
     "@wagmi/cli": "^1.5.2",
     "next": "14.0.4",

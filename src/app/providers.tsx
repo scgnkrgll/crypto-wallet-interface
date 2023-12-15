@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes"
 import { useEffect, useState } from "react"
 import { WagmiConfig } from "wagmi"
 
+import { ToastProvider } from "../components/Toast"
 import config from "../wagmi"
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
@@ -14,7 +15,13 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider attribute="class" forcedTheme="dark">
       <Theme panelBackground="translucent" accentColor="teal">
-        <WagmiConfig config={config}>{mounted && children}</WagmiConfig>
+        <ToastProvider
+          options={{
+            duration: 3000,
+          }}
+        >
+          <WagmiConfig config={config}>{mounted && children}</WagmiConfig>
+        </ToastProvider>
       </Theme>
     </ThemeProvider>
   )
