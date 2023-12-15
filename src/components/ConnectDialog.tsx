@@ -1,7 +1,9 @@
 "use client"
 import { Button, Dialog, Flex } from "@radix-ui/themes"
 import { useState } from "react"
-import { useAccount, useConnect, useDisconnect } from "wagmi"
+import { useAccount, useConnect } from "wagmi"
+
+import DisconnectButton from "./DisconnectButton"
 
 const ConnectDialog = () => {
   const [open, setOpen] = useState(false)
@@ -14,14 +16,7 @@ const ConnectDialog = () => {
     },
   })
 
-  const { disconnect } = useDisconnect()
-
-  if (isConnected)
-    return (
-      <Button key="disconnect" onClick={() => disconnect()}>
-        Disconnect from {connector?.name}
-      </Button>
-    )
+  if (isConnected) return <DisconnectButton />
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
