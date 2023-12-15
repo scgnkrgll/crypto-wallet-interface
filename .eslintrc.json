@@ -1,0 +1,9 @@
+{
+  "extends": "next/core-web-vitals",
+  "plugins": ["simple-import-sort" ],
+  "rules": {
+    "eqeqeq": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  }
+}
