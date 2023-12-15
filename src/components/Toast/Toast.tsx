@@ -21,7 +21,7 @@ type ToastRootColor = React.ComponentProps<typeof Callout.Root>["color"]
 
 const colorMap: Record<Variant, ToastRootColor> = {
   info: "blue",
-  success: "tomato",
+  success: "green",
   error: "tomato",
 }
 

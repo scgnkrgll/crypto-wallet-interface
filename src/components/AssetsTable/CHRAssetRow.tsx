@@ -1,12 +1,19 @@
 "use client"
 
-import { CrossCircledIcon } from "@radix-ui/react-icons"
-import { Callout, Table } from "@radix-ui/themes"
+import { ChevronRightIcon, CrossCircledIcon } from "@radix-ui/react-icons"
+import { Button, Callout, Table } from "@radix-ui/themes"
+import { useNetwork, useSwitchNetwork } from "wagmi"
+
+import formatChr from "@/utils/formatChr"
 
 import { useChrBalanceOf, useChrSymbol } from "../../generated"
+import { SendChr } from "../SendChr"
 import { AssetRowProps } from "./types"
 
 const CHRAssetRow = ({ address, chain }: AssetRowProps) => {
+  const { chain: activeChain } = useNetwork()
+  const { switchNetwork } = useSwitchNetwork()
+
   const { data, isLoading: isLoadingBalance } = useChrBalanceOf({
     watch: true,
     args: [address],
@@ -36,7 +43,16 @@ const CHRAssetRow = ({ address, chain }: AssetRowProps) => {
         CHR on {chain.id === 1 ? "mainnet" : "BSC Testnet"}
       </Table.RowHeaderCell>
       <Table.Cell>
-        {data?.toString()} {symbol}
+        {parseFloat(formatChr(data)).toFixed(4)} {symbol}
+      </Table.Cell>
+      <Table.Cell>
+        {activeChain?.id === chain.id ? (
+          <SendChr symbol={symbol} />
+        ) : (
+          <Button onClick={() => switchNetwork?.(chain.id)}>
+            <ChevronRightIcon width="16" height="16" /> Switch
+          </Button>
+        )}
       </Table.Cell>
     </Table.Row>
   )
