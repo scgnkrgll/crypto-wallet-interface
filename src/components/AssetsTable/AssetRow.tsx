@@ -2,12 +2,9 @@
 
 import { CrossCircledIcon } from "@radix-ui/react-icons"
 import { Callout, Table } from "@radix-ui/themes"
-import { Chain, useBalance } from "wagmi"
+import { useBalance } from "wagmi"
 
-export interface AssetRowProps {
-  address: `0x${string}`
-  chain: Chain
-}
+import { AssetRowProps } from "./types"
 
 const AssetRow = ({ address, chain }: AssetRowProps) => {
   const { data, isLoading } = useBalance({
